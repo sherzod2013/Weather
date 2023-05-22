@@ -43,11 +43,8 @@ public object Network {
     fun getJsonFactory(json: Json): Converter.Factory =
         json.asConverterFactory(contentType = CONTENT_TYPE.toMediaType())
 
-    public fun getLoggingInterceptor(
-        isDebugEnvironment: Boolean
-    ): Interceptor? = if (isDebugEnvironment) {
+    public fun getLoggingInterceptor(): Interceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    } else null
 
     public fun getHeadersInterceptor(
         getCurrentSessionUseCase: GetCurrentSessionUseCase

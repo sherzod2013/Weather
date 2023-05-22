@@ -49,6 +49,13 @@ better-link-movement-method = "2.2.0"
 phone-number = "8.13.7"
 # mvi-core-diff
 mvi-core-diff = "1.4.0"
+# shimmer
+shimmer-v = "0.5.0"
+# glide
+glide-v = "4.12.0"
+glide-compailer = "4.4.0"
+gms-v = "4.3.10"
+nav_version = "2.5.3"
 
 [plugins]
 # android
@@ -63,6 +70,8 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android-gradle-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 #safe-args
 safe-args = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
+safe-args-gradle = { id = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "nav_version" }
+google-gms = { id = "com.google.gms.google-services", version.ref = "gms-v" }
 
 [libraries]
 # android sdk
@@ -102,3 +111,8 @@ better-link-movement-method = { group = "me.saket", name = "better-link-movement
 phone-number = { group = "io.michaelrocks", name = "libphonenumber-android", version.ref = "phone-number" }
 # mvi-core-diff
 mvi-core-diff = { group = "com.github.badoo.mvicore", name = "mvicore-diff", version.ref = "mvi-core-diff" }
+# shimmer
+shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer-v" }
+# glide
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide-v" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide-compailer" }

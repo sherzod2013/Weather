@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseCode</string>
+    <string name="app_name">WeatherApp</string>
 
     <!--   region General Error Text-->
     <string name="general_error_text_unknown">Unknown Error</string>
@@ -16,5 +16,10 @@
     <string name="authorization_company_rules">Company policy</string>
     <string name="authorization_logout">Log out</string>
     <string name="authorization_login">Log in</string>
+    <string name="services_addresses_nothing_found">Ничего не найдено</string>
+    <string name="city_list_pre_request_dialog_title">Запрашивает доступ к Вашему местоположению</string>
+    <string name="city_list_pre_request_dialog_message">Доступ к местоположению поможет определить Ваш город для дальнейшей работы с приложением</string>
+    <string name="addresses_filters_permission_negativ_button_text">Отмена</string>
+    <string name="addresses_filters_allow_text">Ok</string>
     <!--   endregion-->
 </resources>

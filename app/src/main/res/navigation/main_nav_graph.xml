@@ -3,16 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/weatherList">
 
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.yusmp.basecode.presentation.profile.ProfileFragment"
-        android:label="fragment_main_rent"
-        tools:layout="@layout/fragment_profile">
+        android:id="@+id/weatherList"
+        android:name="com.yusmp.basecode.presentation.weather.WeatherListFragment"
+        tools:layout="@layout/fragment_weather">
         <action
-            android:id="@+id/action_profileFragment_to_authorization_nav_graph"
-            app:destination="@id/authorization_nav_graph" />
+            android:id="@+id/toCurrentWeather"
+            app:destination="@id/current_weather" />
     </fragment>
-    <include app:graph="@navigation/authorization_nav_graph" />
+
+    <fragment
+        android:id="@+id/current_weather"
+        android:name="com.yusmp.basecode.presentation.currentWeather.CurrentWeatherFragment"
+        tools:layout="@layout/fragment_current_weather">
+        <argument
+            android:name="param"
+            app:argType="com.yusmp.domain.weather.model.ForecastDayData" />
+    </fragment>
 </navigation>

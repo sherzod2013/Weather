@@ -58,6 +58,17 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    val nav_version = "2.5.3"
+
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 
     // serialization
     implementation(libs.kotlin.serilization.json)
@@ -83,4 +94,15 @@ dependencies {
 
     // model watcher
     implementation(libs.mvi.core.diff)
+
+    //shimmer
+    implementation(libs.shimmer)
+
+    //okHttps
+    implementation(libs.okHttp.logging.interceptor)
+
+    //glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }

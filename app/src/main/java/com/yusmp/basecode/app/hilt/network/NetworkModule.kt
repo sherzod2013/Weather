@@ -17,6 +17,7 @@ import okhttp3.Authenticator
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -49,9 +50,7 @@ object NetworkModule {
     @Provides
     @Singleton
     @LoggingInterceptor
-    fun provideLoggingInterceptor(
-        isDebugEnvironment: Boolean
-    ): Interceptor? = Network.getLoggingInterceptor(isDebugEnvironment)
+    fun provideLoggingInterceptor(): Interceptor = Network.getLoggingInterceptor()
 
     @Provides
     @Singleton

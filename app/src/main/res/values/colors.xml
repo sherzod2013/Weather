@@ -63,4 +63,7 @@
     <color name="success_50">#6633C96F</color>
     <color name="success_25">#3333C96F</color>
     <color name="success_5">#1A33C96F</color>
+    <color name="color_shimmer">#B3B3B3</color>
+    <color name="light_gray">#FFDDDDDD</color>
+    <color name="placeholder_color">#F2F2F2</color>
 </resources>
