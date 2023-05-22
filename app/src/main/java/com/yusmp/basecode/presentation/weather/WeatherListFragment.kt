@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.badoo.mvicore.modelWatcher
 import com.yusmp.basecode.app.hilt.LocationPermissionObserver
 import com.yusmp.basecode.app.setUpLocationObserver
+import com.yusmp.basecode.base.UiConverter.toUi
 import com.yusmp.basecode.databinding.FragmentWeatherBinding
 import com.yusmp.basecode.presentation.common.BaseFragment
 import com.yusmp.basecode.presentation.weather.adapter.WeatherAdapter
@@ -59,7 +60,7 @@ class WeatherListFragment : BaseFragment<FragmentWeatherBinding, WeatherListStat
     override fun FragmentWeatherBinding.setupViews() {
         locationPermission.checkPermission()
         weatherAdapter = WeatherAdapter(WeatherAdapter.Params {
-            findNavController().navigate(WeatherListFragmentDirections.toCurrentWeather(it))
+            findNavController().navigate(WeatherListFragmentDirections.toCurrentWeather(it.toUi()))
         })
         binding.weatherRv.adapter = weatherAdapter
         binding.weatherRv.layoutManager = LinearLayoutManager(requireContext())

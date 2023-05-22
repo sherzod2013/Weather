@@ -20,7 +20,7 @@ data class DayData(
 )
 
 data class HourData(
-    val time: String,
+    val time: Date?,
     val tempC: Double,
     val condition: ConditionData
 )

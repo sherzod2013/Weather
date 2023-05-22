@@ -1,8 +1,10 @@
 package com.yusmp.basecode.app.hilt.dataSourcesUsecasesModules;
 
 import com.yusmp.data.db.auth.AuthDbDataSourceImpl
+import com.yusmp.data.db.weather.WeatherDbDataSourceImpl
 import com.yusmp.data.net.auth.AuthRemoteDataSourceImpl
 import com.yusmp.domain.auth.*
+import com.yusmp.domain.weather.WeatherDbDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,6 +21,8 @@ interface AuthModule {
     fun bindAuthDbDataSource(impl: AuthDbDataSourceImpl): AuthDbDataSource
     // endregion
 
+    @Binds
+    fun bindWeatherDbDataSource(impl: WeatherDbDataSourceImpl): WeatherDbDataSource
     // region use cases
     @Binds
     fun bindClearSessionUseCase(impl: ClearSessionUseCaseImpl): ClearSessionUseCase

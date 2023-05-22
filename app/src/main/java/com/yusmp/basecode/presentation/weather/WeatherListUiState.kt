@@ -7,7 +7,7 @@ import com.yusmp.domain.weather.model.ForecastDayData
 import com.yusmp.domain.weather.model.WeatherData
 
 data class WeatherListState(
-    val forecastDayData: List<RecyclerDataState<ForecastDayData>> = RecyclerDataState.createLoadingState(),
+    val forecastDayData: List<RecyclerDataState<ForecastDayData>>? = RecyclerDataState.createLoadingState(),
     val weatherData: WeatherData? = null,
     val isLoading: Boolean = true,
 ) : UiState

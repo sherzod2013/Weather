@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.badoo.mvicore.modelWatcher
 import com.yusmp.basecode.databinding.FragmentCurrentWeatherBinding
 import com.yusmp.basecode.presentation.common.BaseFragment
+import com.yusmp.basecode.presentation.currentWeather.adapter.WeatherByHourAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,10 +14,11 @@ class CurrentWeatherFragment :
     BaseFragment<FragmentCurrentWeatherBinding, CurrentWeatherUiState, CurrentWeatherEvent>() {
 
     override val viewModel: CurrentWeatherViewModel by viewModels()
+    val adapter = WeatherByHourAdapter()
 
     override val stateRenderer = modelWatcher {
         CurrentWeatherUiState::hourData { hourDate ->
-
+            adapter.submitList(hourDate)
         }
     }
 
@@ -28,7 +30,7 @@ class CurrentWeatherFragment :
     }
 
     override fun FragmentCurrentWeatherBinding.setupViews() {
-
+        list.adapter = adapter
     }
 
     override fun CurrentWeatherEvent.handleEvent() {

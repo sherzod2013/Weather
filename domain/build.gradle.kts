@@ -24,4 +24,6 @@ dependencies {
     implementation(libs.hilt.javax.inject)
     // coroutines
     implementation(libs.coroutines.core)
+    // serialization
+    implementation(libs.kotlin.serilization.json)
 }

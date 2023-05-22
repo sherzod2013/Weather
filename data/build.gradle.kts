@@ -49,4 +49,5 @@ dependencies {
     // hilt annotations
     implementation(libs.hilt.javax.inject)
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 }

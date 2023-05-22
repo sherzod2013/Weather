@@ -89,7 +89,7 @@ object NetConverters {
     )
 
     fun HourResponse.toDomain() = HourData(
-        time.orEmpty(),
+        time.orEmpty().convertToDate("yyyy-MM-dd HH:mm"),
         tempC.orZero(),
         condition.toDomain()
     )

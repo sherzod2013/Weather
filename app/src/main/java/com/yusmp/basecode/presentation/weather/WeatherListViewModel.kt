@@ -7,6 +7,7 @@ import com.yusmp.basecode.app.lifecycle.SingleLiveEvent
 import com.yusmp.basecode.base.recyclerAdapter.RecyclerDataState
 import com.yusmp.basecode.presentation.common.BaseViewModel
 import com.yusmp.domain.location.LocationInteractor
+import com.yusmp.domain.weather.GetCurrentWeatherDbUseCase
 import com.yusmp.domain.weather.GetCurrentWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -20,11 +21,13 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherListViewModel @Inject constructor(
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
+    private val getCurrentWeatherDbUseCase: GetCurrentWeatherDbUseCase,
     private val locationInteractor: LocationInteractor
 ) : BaseViewModel<WeatherListState, WeatherListEvent>(WeatherListState()) {
 
     init {
         getCurrentWeather()
+        observeWeather()
     }
 
     private val _openGSMSettings = SingleLiveEvent<ResolvableApiException>()
@@ -43,23 +46,29 @@ class WeatherListViewModel @Inject constructor(
                 }.onSuccess { location ->
                     locationInteractor.stopLocationUpdates()
                     getCurrentWeatherUseCase("${location.latitude},${location.longitude}").collect { result ->
-                        result.onSuccess { weather ->
-                            updateUiState {
-                                copy(isLoading = false,
-                                    weatherData = weather,
-                                    forecastDayData = weather.forecast.forecastday.map {
-                                        RecyclerDataState.Data(
-                                            it.toString(), it
-                                        )
-                                    })
-                            }
-                        }.onFailure {
+                       result.onFailure {
                             handleError(it)
                         }
                     }
                 }
             }.launchIn(viewModelScope)
 
+    }
+
+    private fun observeWeather() {
+        viewModelScope.launch {
+            getCurrentWeatherDbUseCase(Unit).collect { weather ->
+                updateUiState {
+                    copy(isLoading = false,
+                        weatherData = weather,
+                        forecastDayData = weather?.forecast?.forecastday?.map {
+                            RecyclerDataState.Data(
+                                it.toString(), it
+                            )
+                        })
+                }
+            }
+        }
     }
 
     fun startLocationUpdates() {

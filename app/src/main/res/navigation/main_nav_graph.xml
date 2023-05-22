@@ -20,6 +20,6 @@
         tools:layout="@layout/fragment_current_weather">
         <argument
             android:name="param"
-            app:argType="com.yusmp.domain.weather.model.ForecastDayData" />
+            app:argType="com.yusmp.basecode.presentation.currentWeather.model.ForecastDayDataUi" />
     </fragment>
 </navigation>

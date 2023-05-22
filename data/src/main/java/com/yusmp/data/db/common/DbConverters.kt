@@ -1,9 +1,14 @@
 package com.yusmp.data.db.common
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.yusmp.data.db.auth.SessionEntity
 import com.yusmp.data.db.auth.SessionTypeEntity
+import com.yusmp.data.db.weather.WeatherDataEntity
 import com.yusmp.domain.auth.model.Session
 import com.yusmp.domain.auth.model.SessionType
+import com.yusmp.domain.weather.model.WeatherData
+
 
 @Suppress("TooManyFunctions", "LargeClass")
 object DbConverters {
@@ -35,4 +40,16 @@ object DbConverters {
         refreshToken = refreshToken,
         phone = phone,
     )
+
+    fun WeatherData.toEntity(): WeatherDataEntity {
+        val gson = Gson()
+        val json: String = gson.toJson(this)
+        return WeatherDataEntity(
+            weather = json
+        )
+    }
+
+    fun WeatherDataEntity.toDomain(): WeatherData {
+        return Gson().fromJson(this.weather, WeatherData::class.java)
+    }
 }
