@@ -69,11 +69,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/condition_tv">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/weather_rv"
+        <LinearLayout
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_weather"
-            android:padding="8dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/filter_text"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:text="3 days"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weather_rv"
+                android:layout_width="match_parent"
+                tools:listitem="@layout/item_weather"
+                android:padding="8dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

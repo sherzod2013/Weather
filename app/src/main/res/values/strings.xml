@@ -21,5 +21,6 @@
     <string name="city_list_pre_request_dialog_message">Доступ к местоположению поможет определить Ваш город для дальнейшей работы с приложением</string>
     <string name="addresses_filters_permission_negativ_button_text">Отмена</string>
     <string name="addresses_filters_allow_text">Ok</string>
+    <string name="filtr_text">Фильтр</string>
     <!--   endregion-->
 </resources>

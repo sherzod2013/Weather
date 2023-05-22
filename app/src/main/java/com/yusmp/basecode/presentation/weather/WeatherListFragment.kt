@@ -17,6 +17,7 @@ import com.yusmp.basecode.base.UiConverter.toUi
 import com.yusmp.basecode.databinding.FragmentWeatherBinding
 import com.yusmp.basecode.presentation.common.BaseFragment
 import com.yusmp.basecode.presentation.weather.adapter.WeatherAdapter
+import com.yusmp.basecode.presentation.weather.dialog.FilterDialog
 import com.yusmp.basecode.presentation.weather.listener.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,6 +28,7 @@ class WeatherListFragment : BaseFragment<FragmentWeatherBinding, WeatherListStat
 
     override val viewModel: WeatherListViewModel by viewModels()
     private var weatherAdapter: WeatherAdapter? = null
+    lateinit var filterDialog: FilterDialog
 
     @Inject
     lateinit var locationPermission: LocationPermissionObserver
@@ -43,11 +45,17 @@ class WeatherListFragment : BaseFragment<FragmentWeatherBinding, WeatherListStat
             binding.conditionTv.text = weatherData?.current?.condition?.text
             binding.countryTv.text = weatherData?.location?.name
         }
+        WeatherListState::filterType {
+            binding.filterText.text = it.text
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpLocationObserver(locationPermission)
+        filterDialog = FilterDialog {
+            viewModel.onFilterTypeSelected(it)
+        }
     }
 
     override fun getViewBinding(
@@ -64,6 +72,9 @@ class WeatherListFragment : BaseFragment<FragmentWeatherBinding, WeatherListStat
         })
         binding.weatherRv.adapter = weatherAdapter
         binding.weatherRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.filterText.setOnClickListener {
+            filterDialog.show(parentFragmentManager)
+        }
         viewModel.openGSMSettings.observe(viewLifecycleOwner) {
             locationPermission.askOpenGPS(it)
         }

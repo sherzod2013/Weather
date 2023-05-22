@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:background="@drawable/background_bottom_sheet"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="75"
+            android:layout_marginStart="32dp"
+            android:theme="@style/Text.Headline1.Bold"
+            android:text="@string/filtr_text" />
+
+
+        <TextView
+            android:id="@+id/condition_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="3 дня" />
+        <TextView
+            android:id="@+id/condition_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="5 дня" />
+        <TextView
+            android:id="@+id/condition_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="10 дня" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

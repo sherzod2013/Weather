@@ -6,9 +6,11 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.yusmp.basecode.app.lifecycle.SingleLiveEvent
 import com.yusmp.basecode.base.recyclerAdapter.RecyclerDataState
 import com.yusmp.basecode.presentation.common.BaseViewModel
+import com.yusmp.basecode.presentation.weather.dialog.FilterType
 import com.yusmp.domain.location.LocationInteractor
 import com.yusmp.domain.weather.GetCurrentWeatherDbUseCase
 import com.yusmp.domain.weather.GetCurrentWeatherUseCase
+import com.yusmp.domain.weather.model.ForecastDayData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
@@ -24,6 +26,8 @@ class WeatherListViewModel @Inject constructor(
     private val getCurrentWeatherDbUseCase: GetCurrentWeatherDbUseCase,
     private val locationInteractor: LocationInteractor
 ) : BaseViewModel<WeatherListState, WeatherListEvent>(WeatherListState()) {
+
+    private var allData: List<ForecastDayData> = listOf()
 
     init {
         getCurrentWeather()
@@ -46,7 +50,7 @@ class WeatherListViewModel @Inject constructor(
                 }.onSuccess { location ->
                     locationInteractor.stopLocationUpdates()
                     getCurrentWeatherUseCase("${location.latitude},${location.longitude}").collect { result ->
-                       result.onFailure {
+                        result.onFailure {
                             handleError(it)
                         }
                     }
@@ -58,10 +62,11 @@ class WeatherListViewModel @Inject constructor(
     private fun observeWeather() {
         viewModelScope.launch {
             getCurrentWeatherDbUseCase(Unit).collect { weather ->
+                allData = weather?.forecast?.forecastday ?: listOf()
                 updateUiState {
                     copy(isLoading = false,
                         weatherData = weather,
-                        forecastDayData = weather?.forecast?.forecastday?.map {
+                        forecastDayData = weather?.forecast?.forecastday?.take(this.filterType.cout)?.map {
                             RecyclerDataState.Data(
                                 it.toString(), it
                             )
@@ -73,5 +78,18 @@ class WeatherListViewModel @Inject constructor(
 
     fun startLocationUpdates() {
         locationInteractor.startLocationUpdates()
+    }
+
+    fun onFilterTypeSelected(filterType: FilterType) {
+        updateUiState {
+            copy(
+                forecastDayData = allData.take(filterType.cout).map {
+                    RecyclerDataState.Data(
+                        it.toString(), it
+                    )
+                },
+                filterType = filterType
+            )
+        }
     }
 }
